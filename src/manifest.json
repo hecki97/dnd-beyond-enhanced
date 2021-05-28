@@ -1,0 +1,16 @@
+{
+  "name": "DND Beyond Enhanced",
+  "action": {},
+  "manifest_version": 3,
+  "version": "1.0",
+  "description": "Adds quality-of-life improvements to popular site DND Beyond",
+  "content_scripts": [
+    {
+      "matches": ["*://*.dndbeyond.com/profile/*/characters/*"],
+      "js": ["./script.js"],
+      "css": ["./style.css"],
+      "run_at": "document_end"
+    }
+  ],
+  "permissions": ["tabs", "activeTab", "scripting"]
+}
