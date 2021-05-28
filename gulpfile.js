@@ -1,5 +1,4 @@
-const { src, dest, series, parallel } = require('gulp');
-const rename = require('gulp-rename');
+const { src, dest, parallel } = require('gulp');
 
 function copyExternalLibs() {
   return src('./node_modules/marked/marked.min.js').pipe(
