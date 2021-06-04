@@ -24,3 +24,25 @@ function elementReady(selector) {
     mutObserver.observe(document.documentElement, { childList: true, subtree: true });
   });
 }
+
+/**
+ * Creates and injects a new tab option that opens an external resource for Markdown into the page
+ *
+ * @returns void
+ */
+function injectExternalMarkdownResource() {
+  const anchor = document.createElement('a');
+  anchor.href = 'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet';
+  anchor.text = 'MD Cheatsheet';
+  anchor.rel = 'nofollow';
+  anchor.type = 'noopener';
+  anchor.target = '_blank';
+  anchor.classList.add('ddbc-tab-options__header-heading');
+
+  const option = document.createElement('div');
+  option.classList.add('ddbc-tab-options__header');
+  option.style = 'margin-left: auto;';
+  option.appendChild(anchor);
+
+  document.querySelector('.ct-notes .ddbc-tab-options__nav').appendChild(option);
+}
