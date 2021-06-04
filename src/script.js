@@ -1,3 +1,5 @@
+/* global marked */
+
 let noteObserver = null;
 
 /**
