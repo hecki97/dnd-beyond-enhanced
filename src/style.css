@@ -1,0 +1,11 @@
+.ct-notes .markdown-body {
+    white-space: normal;
+}
+
+.ct-notes .markdown-body ol {
+    list-style-type: decimal;
+}
+
+.ct-notes .markdown-body ul {
+    list-style-type: disc;
+}
