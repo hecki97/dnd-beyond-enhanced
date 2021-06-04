@@ -46,3 +46,10 @@ function injectExternalMarkdownResource() {
 
   document.querySelector('.ct-notes .ddbc-tab-options__nav').appendChild(option);
 }
+
+window.onload = async () => {
+  await elementReady('.ct-primary-box__tab--notes');
+  await elementReady('.ct-notes .ct-content-group:last-child .ct-notes__note');
+
+  injectExternalMarkdownResource();
+};
