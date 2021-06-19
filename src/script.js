@@ -77,14 +77,6 @@ function observeUserNotes() {
   noteObserver.observe(noteContainer, { childList: true });
 }
 
-window.onload = async () => {
-  await elementReady('.ct-primary-box__tab--notes');
-  await elementReady('.ct-notes .ct-content-group:last-child .ct-notes__note');
-
-  injectExternalMarkdownResource();
-  observeUserNotes();
-};
-
 window.onpagehide = () => {
   if (noteObserver) {
     noteObserver.disconnect();
