@@ -32,5 +32,7 @@ window.DDBE_Util = {
     anchor.type = 'noopener';
     anchor.target = '_blank';
     anchor.classList.add(classList);
+
+    return anchor;
   },
 };
