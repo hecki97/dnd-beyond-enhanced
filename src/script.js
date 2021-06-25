@@ -22,11 +22,23 @@ function injectMarkdownHyperlink() {
   notesPrimaryTabList.appendChild(tabListItem);
 }
 
-function convertToMarkdown(container, text) {
-  const injectedSpan = document.createElement('span');
-  injectedSpan.id = 'injected-by-dnd-beyond-enhanced';
-  injectedSpan.innerHTML = marked(text);
-  container.replaceChild(injectedSpan, container.firstChild);
+function convertContentToMarkdown(container, mutation) {
+  const textContent = mutation ? mutation.textContent : container.textContent;
+
+  const markdownContainer = document.createElement('span');
+  markdownContainer.id = 'injected-by-dnd-beyond-enhanced';
+  // marked returns compiled html, so usage of unsafe innerHTML property is required
+  // TODO: Escape compiled HTML before setting innerHTML
+  markdownContainer.innerHTML = marked(textContent);
+
+  // Add necessary class for proper markdown rendering
+  container.classList.add('markdown-body');
+
+  if (container.hasChildNodes()) {
+    container.replaceChild(markdownContainer, container.firstChild);
+  } else {
+    container.appendChild(markdownContainer);
+  }
 }
 
 function registerNoteObserver(container, mutationCallback) {
