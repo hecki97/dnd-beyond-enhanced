@@ -5,6 +5,7 @@ const {
 const sass = require('gulp-sass');
 const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
+const clean = require('gulp-clean');
 
 function include3rdPartyLibs() {
   return src('./node_modules/github-markdown-css/github-markdown.css')
@@ -31,6 +32,29 @@ function transpileCSS() {
     .pipe(dest('dist/'));
 }
 
+function transpileAndCompressCSS() {
+  return src('src/*.scss')
+    .pipe(sass({ outputStyle: 'compressed' }))
+    .pipe(dest('dist/'));
+}
+
+function copyDevManifest() {
+  return src('src/manifest.dev.json')
+    .pipe(rename('manifest.json'))
+    .pipe(dest('dist/'));
+}
+
+function copyBuildManifest() {
+  return src('src/manifest.build.json')
+    .pipe(rename('manifest.json'))
+    .pipe(dest('dist/'));
+}
+
+function cleanDist() {
+  return src('dist/*')
+    .pipe(clean());
+}
+
 task('sass:watch', () => {
   watch('src/*.scss', transpileCSS);
 });
@@ -40,5 +64,13 @@ task('js:watch', () => {
 });
 
 exports.watch = parallel('sass:watch', 'js:watch');
-exports.dev = series(include3rdPartyLibs, parallel(copyJS, transpileCSS), this.watch);
-exports.build = series(include3rdPartyLibs, parallel(minifyJS, transpileCSS));
+exports.dev = series(
+  cleanDist,
+  parallel(include3rdPartyLibs, copyDevManifest, copyJS, transpileCSS),
+  this.watch,
+);
+
+exports.build = series(
+  cleanDist,
+  parallel(include3rdPartyLibs, copyBuildManifest, minifyJS, transpileAndCompressCSS)
+);
