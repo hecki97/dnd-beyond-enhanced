@@ -7,8 +7,9 @@ const rename = require('gulp-rename');
 const uglify = require('gulp-uglify');
 
 function include3rdPartyLibs() {
-  return src('./node_modules/marked/marked.min.js')
-    .pipe(src('./node_modules/github-markdown-css/github-markdown.css'))
+  return src('./node_modules/github-markdown-css/github-markdown.css')
+    .pipe(sass({ outputStyle: 'compressed' }))
+    .pipe(src('./node_modules/marked/marked.min.js'))
     .pipe(dest('dist/'));
 }
 
