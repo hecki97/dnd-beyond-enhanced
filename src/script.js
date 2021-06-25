@@ -31,23 +31,18 @@ function convertToMarkdown(container, text) {
   container.replaceChild(injectedSpan, container.firstChild);
 }
 
-function observeUserNotes() {
-  const noteContainer = document.querySelector('.ct-notes .ct-content-group:last-child div.ct-notes__note');
+function registerNoteObserver(container, mutationCallback) {
+  mutationCallback(container, container);
 
-  noteContainer.classList.add('markdown-body');
-  convertToMarkdown(noteContainer, noteContainer.textContent);
-
-  // Create an observer instance linked to the callback function
-  noteObserver = new MutationObserver(([mutation]) => {
-    if (mutation.addedNodes.item(0) instanceof HTMLSpanElement) {
-      return;
+  const observer = new MutationObserver(([mutation]) => {
+    // Only invoke mutationCallback if the first child is *no* Span element
+    if (!(mutation.addedNodes.item(0) instanceof HTMLSpanElement)) {
+      mutationCallback(container, mutation.target);
     }
-
-    convertToMarkdown(noteContainer, mutation.target.textContent);
   });
 
-  // Start observing the target node for configured mutations
-  noteObserver.observe(noteContainer, { childList: true });
+  observer.observe(container, { childList: true });
+  return observer;
 }
 
 window.onpagehide = () => {
