@@ -56,8 +56,28 @@ function hasIsActiveClass(element) {
 }
 
 window.onload = async () => {
-  await elementReady('.ct-primary-box__tab--notes');
-  await elementReady('.ct-notes .ct-content-group:last-child .ct-notes__note');
+  await elementReady('.ct-character-sheet');
+  await elementReady('.ct-primary-box');
+  console.log('Site Initialized!');
 
-  injectExternalMarkdownResource();
+  const observePrimaryTabList = new MutationObserver(([first, second]) => {
+    const activeListItem = hasIsActiveClass(first.target) ? first.target : second.target;
+
+    switch (activeListItem.textContent) {
+      case 'Notes':
+        injectMarkdownHyperlink();
+        registerNoteObserver(
+          document.querySelector('.ct-notes .ct-content-group:last-child div.ct-notes__note'),
+          convertContentToMarkdown,
+        );
+        break;
+      case 'Actions':
+        break;
+      default:
+        break;
+    }
+  });
+
+  const primaryTabList = document.querySelector('.ddbc-tab-list__nav');
+  observePrimaryTabList.observe(primaryTabList, { attributes: true, subtree: true });
 };
