@@ -8,19 +8,20 @@ let noteObserver = null;
  *
  * @returns void
  */
-function injectExternalMarkdownResource() {
+function injectMarkdownHyperlink() {
   const anchor = createHyperlink(
     'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet',
     'MD Cheatsheet',
     'ddbc-tab-options__header-heading',
   );
 
-  const option = document.createElement('div');
-  option.classList.add('ddbc-tab-options__header');
-  option.style = 'margin-left: auto;';
-  option.appendChild(anchor);
+  const tabListItem = document.createElement('div');
+  tabListItem.classList.add('ddbc-tab-options__header');
+  tabListItem.style = 'margin-left: auto;';
+  tabListItem.appendChild(anchor);
 
-  document.querySelector('.ct-notes .ddbc-tab-options__nav').appendChild(option);
+  const notesPrimaryTabList = document.querySelector('.ct-notes .ddbc-tab-options__nav');
+  notesPrimaryTabList.appendChild(tabListItem);
 }
 
 function convertToMarkdown(container, text) {
