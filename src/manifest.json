@@ -7,7 +7,7 @@
   "content_scripts": [
     {
       "matches": ["*://*.dndbeyond.com/profile/*/characters/*"],
-      "js": ["./marked.min.js", "./script.js"],
+      "js": ["./marked.min.js", "./util.js", "./script.js"],
       "css": ["./github-markdown.css", "./style.css"],
       "run_at": "document_end"
     }
