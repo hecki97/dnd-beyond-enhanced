@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+  "name": "DND Beyond Enhanced",
+  "description": "Adds quality-of-life improvements to popular site DND Beyond",
+  "author": "Y.Heckmann",
+  "version": "1.0",
+  "content_scripts": [
+    {
+      "matches": ["*://*.dndbeyond.com/profile/*/characters/*"],
+      "js": ["./marked.min.js", "./util.min.js", "./script.min.js"],
+      "css": ["./github-markdown.css", "./style.css"]
+    }
+  ],
+  "permissions": ["*://*.dndbeyond.com/*", "activeTab"]
+}
