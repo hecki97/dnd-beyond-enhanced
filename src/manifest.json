@@ -1,7 +1,7 @@
 {
   "name": "DND Beyond Enhanced",
   "action": {},
-  "manifest_version": 3,
+  "manifest_version": 2,
   "version": "1.0",
   "description": "Adds quality-of-life improvements to popular site DND Beyond",
   "content_scripts": [
