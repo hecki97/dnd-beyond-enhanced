@@ -50,6 +50,9 @@ window.onpagehide = () => {
     noteObserver.disconnect();
   }
 };
+function hasIsActiveClass(element) {
+  return [...element.classList].filter((value) => /--is-active/.test(value)).length > 0;
+}
 
 window.onload = async () => {
   await elementReady('.ct-primary-box__tab--notes');
