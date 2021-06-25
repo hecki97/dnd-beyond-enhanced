@@ -45,11 +45,14 @@ function registerNoteObserver(container, mutationCallback) {
   return observer;
 }
 
+/*
 window.onpagehide = () => {
-  if (noteObserver) {
-    noteObserver.disconnect();
+  if (observer) {
+    observer.disconnect();
   }
 };
+*/
+
 function hasIsActiveClass(element) {
   return [...element.classList].filter((value) => /--is-active/.test(value)).length > 0;
 }
