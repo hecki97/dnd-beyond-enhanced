@@ -1,8 +1,6 @@
 /* global marked */
 const { elementReady, createHyperlink } = window.DDBE_Util;
 
-let noteObserver = null;
-
 /**
  * Creates and injects a new tab option that opens an external resource for Markdown into the page
  *
