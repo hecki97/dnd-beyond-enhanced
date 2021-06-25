@@ -8,4 +8,14 @@
     ul {
         list-style-type: disc;
     }
+
+    a {
+        color: #c53131;
+        text-decoration: none;
+    }
+
+    a:hover {
+        color: #000;
+        text-decoration: underline;
+    }
 }
