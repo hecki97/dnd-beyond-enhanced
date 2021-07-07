@@ -1,3 +1,5 @@
+/* global chrome, browser */
+
 window.DDBE_Util = {
   /**
    * Waits for an element satisfying selector to exist, then resolves promise with the element.
@@ -34,5 +36,9 @@ window.DDBE_Util = {
     anchor.classList.add(classList);
 
     return anchor;
+  },
+
+  getLocalResourceURL(path) {
+    return (chrome || browser).runtime.getURL(path);
   },
 };
