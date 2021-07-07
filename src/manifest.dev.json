@@ -11,5 +11,6 @@
       "css": ["./github-markdown.css", "./style.css"]
     }
   ],
+  "web_accessible_resources": ["images/background-dark.jpg"],
   "permissions": ["*://*.dndbeyond.com/*", "activeTab"]
 }
