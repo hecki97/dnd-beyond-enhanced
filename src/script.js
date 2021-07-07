@@ -67,6 +67,10 @@ function hasIsActiveClass(element) {
   return [...element.classList].filter((value) => /--is-active/.test(value)).length > 0;
 }
 
+function hasDarkModeClass(element) {
+  return [...element.classList].filter((value) => /--dark-mode/.test(value)).length > 0;
+}
+
 window.onload = async () => {
   await elementReady('.ct-character-sheet');
   await elementReady('.ct-primary-box');
