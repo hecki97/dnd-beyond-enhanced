@@ -12,6 +12,20 @@
     a {
         color: #c53131;
         text-decoration: none;
+.ct-primary-box--dark-mode .markdown-body {
+    table td,
+    table th {
+        border-color: var(--accent-border-color);
+    }
+
+    table tr {
+        background-color: #10161a;
+        border-top-color: var(--accent-border-color);
+    }
+
+    table tr:nth-child(2n) {
+        background-color: rgba(160, 160, 160, .1);
+    }
     }
 
     a:hover {
