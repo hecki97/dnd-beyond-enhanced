@@ -26,8 +26,14 @@
     table tr:nth-child(2n) {
         background-color: transparent;
     }
+
+    code, pre {
         background-color: rgba(160, 160, 160, .1);
+        color: #fff;
     }
+
+    pre > code {
+        background-color: transparent;
     }
 
     a:hover {
