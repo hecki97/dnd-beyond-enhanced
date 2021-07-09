@@ -19,11 +19,13 @@
     }
 
     table tr {
-        background-color: #10161a;
+        background-color: rgba(160, 160, 160, .1);
         border-top-color: var(--accent-border-color);
     }
 
     table tr:nth-child(2n) {
+        background-color: transparent;
+    }
         background-color: rgba(160, 160, 160, .1);
     }
     }
