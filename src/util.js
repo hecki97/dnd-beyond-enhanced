@@ -26,6 +26,15 @@ window.DDBE_Util = {
     mutObserver.observe(document.documentElement, { childList: true, subtree: true });
   }),
 
+  DOMChanged: () => new Promise((resolve) => {
+    const mutationObserver = new MutationObserver((observedMutations, observer) => {
+      resolve(observedMutations);
+      observer.disconnect();
+    });
+
+    mutationObserver.observe(document.documentElement, { subtree: true, childList: true });
+  }),
+
   createHyperlink: (href, text, ...classList) => {
     const anchor = document.createElement('a');
     anchor.href = href;
