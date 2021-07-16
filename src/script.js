@@ -55,6 +55,19 @@ function registerNoteObserver(container, mutationCallback) {
   return observer;
 }
 
+function registerSettingsSyncObserver(callback) {
+  const observer = new MutationObserver(async ([mutation]) => {
+    if (/sync-blocker-inactive/.test(mutation.oldValue)) {
+      // Block until DOM chage has been made
+      await DOMChanged();
+      callback();
+    }
+  });
+
+  const syncBlockerElement = document.querySelector('.sync-blocker');
+  observer.observe(syncBlockerElement, { attributeOldValue: true });
+}
+
 /*
 window.onpagehide = () => {
   if (observer) {
