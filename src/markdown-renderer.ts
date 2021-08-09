@@ -14,7 +14,7 @@ namespace DnDBeyondEnhanced {
 
       const tabListItem = document.createElement('div');
       tabListItem.classList.add('ddbc-tab-options__header');
-      tabListItem.style = 'margin-left: auto;';
+      tabListItem.style.marginLeft = 'auto';
       tabListItem.appendChild(anchor);
 
       const notesPrimaryTabList = document.querySelector('.ct-notes .ddbc-tab-options__nav');
