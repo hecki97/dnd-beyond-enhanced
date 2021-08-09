@@ -29,6 +29,16 @@ namespace DnDBeyondEnhanced {
       const primaryTabList = document.querySelector('.ddbc-tab-list__nav');
       this.primaryBoxObserver.observe(primaryTabList, { attributes: true, subtree: true })
     }
+
+    public registerNoteObserver(container, mutationCallback) {
+      mutationCallback(container, container);
+
+      const observer = new MutationObserver(([mutation]) => {
+        // Only invoke mutationCallback if the first child is *no* Span element
+        if (!(mutation.addedNodes.item(0) instanceof HTMLSpanElement)) {
+          mutationCallback(container, mutation.target);
         }
+      });
+    }
     }
 }
