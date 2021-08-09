@@ -25,8 +25,10 @@ namespace DnDBeyondEnhanced {
             break;
         }
       });
-        disconnectPrimaryBoxObserver() {
-    
+
+      const primaryTabList = document.querySelector('.ddbc-tab-list__nav');
+      this.primaryBoxObserver.observe(primaryTabList, { attributes: true, subtree: true })
+    }
         }
     }
 }
