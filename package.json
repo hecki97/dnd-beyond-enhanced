@@ -2,7 +2,7 @@
   "name": "dnd-beyond-enhanced",
   "version": "1.0.0",
   "description": "Chrome plugin that adds quality-of-life improvements to popular site DND Beyond",
-  "main": "index.js",
+  "private": true,
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
   },
