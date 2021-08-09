@@ -5,8 +5,8 @@ namespace DnDBeyondEnhanced {
      *
      * @returns void
      */
-    public injectMarkdownHyperlink() {
-      const anchor = createHyperlink(
+    public static injectMarkdownHyperlink() {
+      const anchor = Util.createHyperlink(
         'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet',
         'MD Cheatsheet',
         'ddbc-tab-options__header-heading',
@@ -21,7 +21,7 @@ namespace DnDBeyondEnhanced {
       notesPrimaryTabList.appendChild(tabListItem);
     }
 
-    private convertContentToMarkdown(container, mutation) {
+    public static convertContentToMarkdown(container: HTMLElement, mutation: HTMLElement) {
       const textContent = mutation ? mutation.textContent : container.textContent;
 
       const markdownContainer = document.createElement('span');
