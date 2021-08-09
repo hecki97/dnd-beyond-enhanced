@@ -40,5 +40,17 @@ namespace DnDBeyondEnhanced {
         }
       });
     }
+
+    public disconnectPrimaryBoxObserver() {
+      if (!this.primaryBoxObserver) {
+        throw new Error('Cannot disconnect uninitialized observer');
+      }
+
+      this.primaryBoxObserver.disconnect();
     }
+
+    private hasIsActiveClass(element) {
+      return [...element.classList].filter((value) => /--is-active/.test(value)).length > 0;
+    }
+  }
 }
