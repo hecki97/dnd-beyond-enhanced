@@ -13,10 +13,10 @@ namespace DnDBeyondEnhanced {
 
         switch (activeListItem.textContent) {
           case 'Notes':
-            this.injectMarkdownHyperlink();
+            MarkdownRenderer.injectMarkdownHyperlink();
             this.registerNoteObserver(
               document.querySelector('.ct-notes .ct-content-group:last-child div.ct-notes__note'),
-              convertContentToMarkdown,
+              MarkdownRenderer.convertContentToMarkdown,
             );
             break;
           case 'Inventory':
