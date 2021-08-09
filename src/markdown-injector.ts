@@ -5,7 +5,7 @@ namespace DnDBeyondEnhanced {
 
     public observePrimaryBox() {
       this.primaryBoxObserver = new MutationObserver(([first, second]) => {
-        const activeListItem = this.hasIsActiveClass(first.target) ? first.target : second.target;
+        const activeListItem = this.hasIsActiveClass(<HTMLElement>first.target) ? first.target : second.target;
 
         if (this.activeObserver) {
           this.activeObserver.disconnect();
