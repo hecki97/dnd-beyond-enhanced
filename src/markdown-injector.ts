@@ -30,7 +30,7 @@ namespace DnDBeyondEnhanced {
       this.primaryBoxObserver.observe(primaryTabList, { attributes: true, subtree: true })
     }
 
-    public registerNoteObserver(container, mutationCallback) {
+    public registerNoteObserver(container: Element, mutationCallback: Function) {
       mutationCallback(container, container);
 
       const observer = new MutationObserver(([mutation]) => {
@@ -49,7 +49,7 @@ namespace DnDBeyondEnhanced {
       this.primaryBoxObserver.disconnect();
     }
 
-    private hasIsActiveClass(element) {
+    private hasIsActiveClass(element: HTMLElement) {
       return [...element.classList].filter((value) => /--is-active/.test(value)).length > 0;
     }
   }
