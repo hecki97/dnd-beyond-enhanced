@@ -50,7 +50,7 @@ namespace DnDBeyondEnhanced {
     }
 
     private hasIsActiveClass(element: HTMLElement) {
-      return [...element.classList].filter((value) => /--is-active/.test(value)).length > 0;
+      return Array.from(element.classList).filter((value) => /--is-active/.test(value)).length > 0;
     }
   }
 }
