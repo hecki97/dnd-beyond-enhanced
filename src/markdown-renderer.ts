@@ -20,5 +20,24 @@ namespace DnDBeyondEnhanced {
       const notesPrimaryTabList = document.querySelector('.ct-notes .ddbc-tab-options__nav');
       notesPrimaryTabList.appendChild(tabListItem);
     }
+
+    private convertContentToMarkdown(container, mutation) {
+      const textContent = mutation ? mutation.textContent : container.textContent;
+
+      const markdownContainer = document.createElement('span');
+      markdownContainer.id = 'injected-by-dnd-beyond-enhanced';
+      // marked returns compiled html, so usage of unsafe innerHTML property is required
+      // TODO: Escape compiled HTML before setting innerHTML
+      markdownContainer.innerHTML = marked(textContent);
+
+      // Add necessary class for proper markdown rendering
+      container.classList.add('markdown-body');
+
+      if (container.hasChildNodes()) {
+        container.replaceChild(markdownContainer, container.firstChild);
+      } else {
+        container.appendChild(markdownContainer);
+      }
+    }
   }
 }
