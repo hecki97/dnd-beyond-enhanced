@@ -40,6 +40,8 @@ export class MarkdownInjector {
         mutationCallback(container, mutation.target);
       }
     });
+
+    observer.observe(container, { childList: true });
   }
 
   public disconnectPrimaryBoxObserver() {
