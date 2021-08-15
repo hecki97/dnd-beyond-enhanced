@@ -7,7 +7,7 @@ export class MarkdownRenderer {
    *
    * @returns void
    */
-  public static injectMarkdownHyperlink() {
+  public static injectMarkdownHyperlink(parent: Element) {
     const anchor = Util.createHyperlink(
       'https://github.com/adam-p/markdown-here/wiki/Markdown-Cheatsheet',
       'MD Cheatsheet',
@@ -17,10 +17,8 @@ export class MarkdownRenderer {
     const tabListItem = document.createElement('div');
     tabListItem.classList.add('ddbc-tab-options__header');
     tabListItem.style.marginLeft = 'auto';
-    tabListItem.appendChild(anchor);
-
-    const notesPrimaryTabList = document.querySelector('.ct-notes .ddbc-tab-options__nav');
-    notesPrimaryTabList.appendChild(tabListItem);
+    tabListItem.append(anchor);
+    parent.append(tabListItem);
   }
 
   public static convertContentToMarkdown(container: HTMLElement, mutation: HTMLElement) {
