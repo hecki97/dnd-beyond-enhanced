@@ -37,7 +37,7 @@ export class Util {
     });
   }
 
-  public static createHyperlink(href: string, text: string, ...classList: string[]) {
+  public static createHyperlink(href: string, text: string, ...classList: string[]): HTMLAnchorElement {
     const anchor = document.createElement('a');
     anchor.href = href;
     anchor.text = text;
@@ -49,7 +49,7 @@ export class Util {
     return anchor;
   }
 
-  public static getLocalResourceURL(path: string) {
+  public static getLocalResourceURL(path: string): string {
     return (chrome || browser).runtime.getURL(path);
   }
 }
