@@ -14,7 +14,8 @@ export class MarkdownInjector {
 
       switch (activeListItem.textContent) {
         case 'Notes':
-          MarkdownRenderer.injectMarkdownHyperlink();
+          const notesPrimaryTabList = document.querySelector('.ct-notes .ddbc-tab-options__nav');
+          MarkdownRenderer.injectMarkdownHyperlink(notesPrimaryTabList);
           this.registerNoteObserver(
             document.querySelector('.ct-notes .ct-content-group:last-child div.ct-notes__note'),
             MarkdownRenderer.convertContentToMarkdown,
