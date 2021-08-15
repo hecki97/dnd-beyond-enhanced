@@ -3,9 +3,11 @@ const {
 } = require('gulp');
 
 const sass = require('gulp-sass');
-const rename = require('gulp-rename');
-const uglify = require('gulp-uglify');
 const clean = require('gulp-clean');
+const webpack = require('webpack');
+const gulpWebpack = require('webpack-stream');
+
+const config = require('./webpack.config');
 
 function include3rdPartyLibs() {
   return src('./node_modules/github-markdown-css/github-markdown.css')
@@ -14,15 +16,24 @@ function include3rdPartyLibs() {
     .pipe(dest('dist/'));
 }
 
-function minifyJS() {
-  return src('src/*.js')
-    .pipe(uglify())
-    .pipe(rename({ extname: '.min.js' }))
+function copyManifest() {
+  return src('src/manifest.json')
     .pipe(dest('dist/'));
 }
 
-function copyJS() {
-  return src('src/*.js')
+function transpileTS() {
+  return src('./src/script.ts')
+    .pipe(gulpWebpack(config, webpack))
+    .pipe(dest('dist/'));
+}
+
+function transpileAndCompressTS() {
+  return src('./src/script.ts')
+    .pipe(gulpWebpack({
+      ...config,
+      mode: 'production',
+      watch: false,
+    }, webpack))
     .pipe(dest('dist/'));
 }
 
@@ -38,39 +49,27 @@ function transpileAndCompressCSS() {
     .pipe(dest('dist/'));
 }
 
-function copyDevManifest() {
-  return src('src/manifest.dev.json')
-    .pipe(rename('manifest.json'))
-    .pipe(dest('dist/'));
-}
-
-function copyBuildManifest() {
-  return src('src/manifest.build.json')
-    .pipe(rename('manifest.json'))
-    .pipe(dest('dist/'));
-}
-
 function cleanDist() {
   return src('dist/*')
     .pipe(clean());
 }
 
 task('sass:watch', () => {
-  watch('src/*.scss', transpileCSS);
+  watch('src/**/*.scss', transpileCSS);
 });
 
-task('js:watch', () => {
-  watch('src/*.js', copyJS);
+task('ts:watch', () => {
+  watch('src/**/*.ts', transpileTS);
 });
 
-exports.watch = parallel('sass:watch', 'js:watch');
+exports.watch = parallel('sass:watch', 'ts:watch');
 exports.dev = series(
   cleanDist,
-  parallel(include3rdPartyLibs, copyDevManifest, copyJS, transpileCSS),
+  parallel(include3rdPartyLibs, copyManifest, transpileTS, transpileCSS),
   this.watch,
 );
 
 exports.build = series(
   cleanDist,
-  parallel(include3rdPartyLibs, copyBuildManifest, minifyJS, transpileAndCompressCSS)
+  parallel(include3rdPartyLibs, copyManifest, transpileAndCompressTS, transpileAndCompressCSS),
 );

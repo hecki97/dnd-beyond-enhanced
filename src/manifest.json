@@ -7,9 +7,10 @@
   "content_scripts": [
     {
       "matches": ["*://*.dndbeyond.com/profile/*/characters/*"],
-      "js": ["./marked.min.js", "./util.js", "./script.js"],
+      "js": ["./marked.min.js", "./bundle.js"],
       "css": ["./github-markdown.css", "./style.css"]
     }
   ],
+  "web_accessible_resources": ["images/background-dark.jpg"],
   "permissions": ["*://*.dndbeyond.com/*", "activeTab"]
 }
